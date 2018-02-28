@@ -33,7 +33,7 @@ class SiteController extends Controller
     public function actionDevice($id)
     {
         if (Yii::$app->request->isAjax){
-            $id = strip_tags(Yii::$app->request->get('id'));
+            $id = Yii::$app->request->get('id');
             $tree = new Tree();
             return $tree->getProperties($id);
         }
@@ -44,7 +44,7 @@ class SiteController extends Controller
         $objects = new Tree();
         $rezult = $objects->getObjectsTree();
         if (Yii::$app->request->isPost){
-            $id = strip_tags(Yii::$app->request->post('id'));
+            $id = Yii::$app->request->post('id');
             $graph = $objects->getObject($id);
             if (!is_object($graph)){
                 $graph = null;
@@ -59,14 +59,27 @@ class SiteController extends Controller
     public function actionViewgraph($id = null)
     {
         if (Yii::$app->request->isGet){
-            $id = strip_tags(Yii::$app->request->get('id'));
+            $id = Yii::$app->request->get('id');
             $viewgraph = new Tree();
             $rezult = $viewgraph->getObject($id);
             $x = time() * 1000;
             $y = $rezult->objects[0]->fuel;
-            $ret = [$x, (int)$y];
+            $rez = [$x, (int)$y];
             sleep(1);
-            return json_encode($ret);
+            return json_encode($rez);
+        }
+    }
+
+    public function actionViewspeed($id = null)
+    {
+        if (Yii::$app->request->isGet){
+            $id = Yii::$app->request->get('id');
+            $viewspeed = new Tree();
+            $rezult = $viewspeed->getObject($id);
+            $speed = $rezult->objects[0]->speed;
+            $rez = (int)$speed;
+            sleep(1);
+            return json_encode($rez);
         }
     }
 
