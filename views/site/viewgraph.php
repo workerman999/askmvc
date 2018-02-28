@@ -7,7 +7,6 @@ $id = $graph->objects[0]->id;
 <script type="text/javascript">
 
     function requestData(id) {
-        console.log(id);
         $.ajax({
             url: 'viewgraph',
             'dataType': 'json',
@@ -16,7 +15,7 @@ $id = $graph->objects[0]->id;
             },
             success: function(point) {
                 var series = chart.series[0],
-                    shift = series.data.length > 30;
+                    shift = series.data.length > 100;
 
                 chart.series[0].addPoint(point, true, shift);
 
