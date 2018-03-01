@@ -146,7 +146,6 @@ function initMap() {
         'dataType': 'json',
         success: function (data) {
             for (i = 0; i < data.objects.length; i++){
-                console.log(data.objects.length);
                 var latvalue = Number(data.objects[i].state['lat']);
                 var lngvalue = Number(data.objects[i].state['lon']);
                 var myLatLng = {lat: latvalue, lng: lngvalue};

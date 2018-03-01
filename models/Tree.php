@@ -48,7 +48,7 @@ class Tree
         return $this->objectstree;
     }
 
-    //построение дерева и группировка мобильных объектов согласно групп
+    //построение дерева и группировка мобильных объектов согласно групп в JSON
     public function getTree()
     {
         $this->getGroupsTree();
@@ -70,7 +70,7 @@ class Tree
         return json_encode($this->groupstree, JSON_UNESCAPED_UNICODE);
     }
 
-    //получение всех свойств мобильного объекта
+    //получение всех свойств мобильного объекта в JSON
     public function getProperties($id)
     {
         $this->properties = file_get_contents('http://195.93.229.66:4242/main?func=objectproperties&objects=' . $id . '&uid=1cdea3c3-957d-4789-afd9-2cbc18a5a1f7&out=json');
